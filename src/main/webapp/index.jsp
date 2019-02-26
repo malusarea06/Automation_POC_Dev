@@ -79,6 +79,9 @@ button:hover {
    
     <label for="firstName"><b>First Name</b></label>
     <input type="text" placeholder="Enter First Name" id="firstName" pattern="[A-Za-z]+" required="required"/>
+    
+    <label for="middleName"><b>Middle Name</b></label>
+    <input type="text" placeholder="Enter Middle Name" id="middleName" pattern="[A-Za-z]+"/>
 
     <label for="lastName"><b>Last Name</b></label>
     <input type="text" placeholder="Enter Last Name" id="lastName" pattern="[A-Za-z]+" required="required"/>

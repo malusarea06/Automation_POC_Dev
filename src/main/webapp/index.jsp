@@ -74,17 +74,17 @@ button:hover {
 </style>
 <body>
 
-<form style="border:1px solid #ccc" action="getFullName()">
+<form style="border:1px solid #ccc" id="myForm">
   <div class="container">
    
     <label for="firstName"><b>First Name</b></label>
-    <input type="text" placeholder="Enter First Name" id="firstName" pattern="[A-Za-z]+" required="required"/>
-
+    <input type="text" placeholder="Enter First Name" id="firstName" pattern="[A-Za-z]+"/>
+	  
     <label for="lastName"><b>Last Name</b></label>
     <input type="text" placeholder="Enter Last Name" id="lastName" pattern="[A-Za-z]+" required="required"/>
 
 	<div class="clearfix" align="center">
-      <button type="submit" class="signupbtn">Submit</button>
+      <button type="submit" class="signupbtn" >Submit</button>
     </div>
     
     <label for="fullName"><b>Full Name</b></label>
@@ -93,16 +93,20 @@ button:hover {
   </div>
 </form>
 <script type="text/javascript">
+document.getElementById("myForm").onsubmit = function() {getFullName()};
+setTimeout(location.reload.bind(location), 100000);
 	function getFullName() {
-		var mName = document.getElementById("middleName").value;
-		var fullName = "";
-		if(mName==""){
-			fullName += document.getElementById("firstName").value + " "+
-			document.getElementById("lastName").value;
-		} else {
-			fullName += document.getElementById("firstName").value + " "+ mName +" "+document.getElementById("lastName").value;
-		}
-		document.getElementById("fullName").value = fullName;
+		var fname = document.getElementById("firstName").value;
+		var lname = document.getElementById("lastName").value;
+		if(fname==""){
+			document.getElementById("firstName").placeholder = "Please fill out this field";
+			return;	
+		} else if(lname==""){
+			document.getElementById("lastName").placeholder = "Please fill out this field";
+			return;	
+		} 
+		document.getElementById("fullName").value = fname + " "+lname;
+		
 	}
 </script>
 

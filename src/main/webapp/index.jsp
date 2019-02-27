@@ -20,14 +20,9 @@ input[type=text], input[type=password] {
   background: #f1f1f1;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type=text]:focus {
   background-color: #ddd;
   outline: none;
-}
-
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
 }
 
 /* Set a style for all buttons */
@@ -59,7 +54,7 @@ button:hover {
 }
 
 /* Clear floats */
- .clearfix::after {
+.clearfix::after {
   content: "";
   clear: both;
   display: table;
@@ -74,50 +69,52 @@ button:hover {
 </style>
 <body>
 
-<form style="border:1px solid #ccc" id="myForm">
+<form style="border:1px solid #ccc">
   <div class="container">
    
     <label for="firstName"><b>First Name</b></label>
-    <input type="text" placeholder="Enter First Name" id="firstName" pattern="[A-Za-z]+"/>
+    <input type="text" placeholder="Enter First Name" id="firstName"/>
     
     <label for="middleName"><b>Middle Name</b></label>
-    <input type="text" placeholder="Enter Middle Name" id="middleName" pattern="[A-Za-z]+"/>
+    <input type="text" placeholder="Enter Middle Name" id="middleName"/>
 
     <label for="lastName"><b>Last Name</b></label>
-    <input type="text" placeholder="Enter Last Name" id="lastName" pattern="[A-Za-z]+" required="required"/>
+    <input type="text" placeholder="Enter Last Name" id="lastName"/>
 
-	<div class="clearfix" align="center">
-      <button type="submit" class="signupbtn" >Submit</button>
+    <div class="clearfix" align="center">
+      <button type="button" class="signupbtn" onclick="getFullName()">Generate Full Name</button>
     </div>
     
     <label for="fullName"><b>Full Name</b></label>
-    <input type="text" id="fullName" readonly>
+    <input type="text" id="fullName" readonly/>
     
   </div>
 </form>
 <script type="text/javascript">
-document.getElementById("myForm").onsubmit = function() {getFullName()};
-setTimeout(location.reload.bind(location), 100000);
-	function getFullName() {
-		var fname = document.getElementById("firstName").value;
-		var lname = document.getElementById("lastName").value;
-		if(fname==""){
-			document.getElementById("firstName").placeholder = "Please fill out this field";
-			return;	
-		} else if(lname==""){
-			document.getElementById("lastName").placeholder = "Please fill out this field";
-			return;	
-		}
-		var mName = document.getElementById("middleName").value;
-		var fullName = "";
-		if(mName==""){
-			fullName += fname + " "+lname;
-		} else {
-			fullName += fname + " "+ mName +" "+ lname;
-		}
-		document.getElementById("fullName").value = fullName;
-		
-	}
+
+       function getFullName() {
+              var fname = document.getElementById("firstName");
+              var lname = document.getElementById("lastName");
+              var mName = document.getElementById("middleName");
+              var fullname =  document.getElementById("fullName");
+              var message = "Please fill out the field in the correct format";
+              if(fname.value.match(/^[A-Za-z]+$/)==null){
+            	  fname.value="";
+            	  fname.placeholder = message;
+            	  fullname.value="";
+            	  return;
+              } else if(lname.value.match(/^[A-Za-z]+$/)==null){
+            	  lname.value="";
+            	  lname.placeholder = message;
+            	  fullname.value="";
+            	  return;
+              }
+              if(mName==""){
+                     fullName.value = fname.value + " "+lname.value;
+              } else {
+                     fullName.value = fname.value + " "+ mName.value +" "+ lname.value;
+              }
+       }
 </script>
 
 </body>

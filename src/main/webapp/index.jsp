@@ -111,7 +111,13 @@ button:hover {
               }
               if(mName==""){
                      fullName.value = fname.value + " "+lname.value;
-              } else {
+              } else if(mName.value.match(/^[A-Za-z]+$/)==null){
+            	  mName.value="";
+            	  mName.placeholder = message;
+            	  fullname.value="";
+            	  return;
+              }
+              else {
                      fullName.value = fname.value + " "+ mName.value +" "+ lname.value;
               }
        }
